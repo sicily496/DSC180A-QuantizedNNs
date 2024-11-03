@@ -61,5 +61,6 @@ This is the directory holding the additional resources
     This is the notebook containing working code for loading MNIST data through keras, and train neural network from pytorch on MNIST data. It also include function to load data into GPFQ for quantization.
 
 ### `requirements.txt`
-    This is the file holding the required package version for the environment.
+
+This is the file holding the required package version for the environment.
 
