@@ -1,4 +1,4 @@
-# GPFQ: Post-Training Quantization On Pre-trained Model on MNIST with Hyper-parameter Analysis
+# GPFQ: Post-Training Quantization On Pre-trained Model with Hyper-parameter Analysis
 ## Overview
 This is the repository for DSC180 Q1 project, for conducting post-training quantization, specifically GPFQ algorithm, on MNIST dataset.
 
