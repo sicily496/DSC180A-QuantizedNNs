@@ -21,7 +21,7 @@ g.manual_seed(0)
 # use above function and g to preserve reproducibility.
 
 
- class Imagenet(Dataset):
+class Imagenet(Dataset):
      """
      Validation dataset of Imagenet
      """
@@ -78,7 +78,7 @@ def data_loader(ds_name, batch_size, num_workers):
                                 num_workers=num_workers) 
 
     elif ds_name == 'CIFAR10':
-        data_dir = '../data'
+        data_dir = '../data/CIFAR10'
 
         transform_train = transforms.Compose([
                 transforms.RandomCrop(32, padding=4),
@@ -112,14 +112,13 @@ def data_loader(ds_name, batch_size, num_workers):
             transforms.Normalize((0.1307,), (0.3081,))
         ])
         
-        train_ds = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'x_train_sample'), transform=transform)
-        test_ds = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'x_test_sample'), transform=transform)
+        train_ds = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'train'), transform=transform)
+        test_ds = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'test'), transform=transform)
         
         train_dl = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
                               num_workers=num_workers, worker_init_fn=seed_worker, generator=g)
         test_dl = DataLoader(test_ds, batch_size=min(batch_size, 1024), shuffle=False,
                              num_workers=num_workers)
-    return train_dl, test_dl 
 
     else:
         raise Exception('Unkown dataset!')
