@@ -1,6 +1,6 @@
 # GPFQ: Post-Training Quantization On Pre-trained Model with Hyper-parameter Analysis
 ## Overview
-This is the repository for DSC180 Q1 project, for conducting post-training quantization, specifically GPFQ algorithm, on MNIST dataset.
+This is the repository for DSC180 Q1 project, for conducting post-training quantization, specifically GPFQ algorithm, on CIFAR10 dataset.
 
 ## Guide on Installing Dependencies
 
@@ -21,7 +21,7 @@ This should install all the required dependencies of this project.
 
 ## Repo Overview
 
-This repository contains code for replicating GPFQ quantization algorithm and notebook for holding MNIST data and pre-trained model. There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
+This repository contains code for replicating GPFQ quantization algorithm and notebook for holding CIFAR10 data and pre-trained model. There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
 
 ### `Logs`
 
@@ -58,7 +58,7 @@ This is the directory holding the additional resources
     Scripts containing helper functions
 
 - **`setup_dataset.ipynb`**
-    This is the notebook containing working code for loading MNIST data through keras, and train neural network from pytorch on MNIST data. It also include function to load data into GPFQ for quantization.
+    This is the notebook containing working code for downloading CIFAR10 dataset through keras.
 
 ### `requirements.txt`
 
