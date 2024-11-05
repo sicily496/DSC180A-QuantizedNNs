@@ -21,7 +21,7 @@ This should install all the required dependencies of this project.
 
 ## Repo Overview
 
-This repository contains code for replicating GPFQ quantization algorithm and notebook for holding MNIST data and pre-trained model. There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
+This repository contains code for replicating GPFQ quantization algorithm and notebook for holding CIFAR10 data and pre-trained model. There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
 
 ### `Logs`
 
