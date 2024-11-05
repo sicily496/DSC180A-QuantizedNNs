@@ -74,8 +74,9 @@ def main(b, mlp_s, cnn_s, bs, mlp_per, cnn_per, l):
         }
 
     elif args.data_set == 'CIFAR10':
-        model = torch.load(os.path.join('pretrained_cifar10', args.model + '_cifar10.pt'), 
-            map_location=torch.device('cpu')).module
+        model = getattr(torchvision.models, args.model)(pretrained=True)
+        # model = torch.load(os.path.join('pretrained_cifar10', args.model + '_cifar10.pt'), 
+        #     map_location=torch.device('cpu')).module
 
         original_accuracy_table = {}
     

@@ -64,3 +64,9 @@ This is the directory holding the additional resources
 
 This is the file holding the required package version for the environment.
 
+
+## Commands to Run
+To run GPFQ on CIFAR-10, first cd into `src`, then use the following command:
+```
+python main.py -ds CIFAR10 -model resnet18 -b 4 -bs 256 -s 1.16
+```
