@@ -42,6 +42,9 @@ This is the directory holding the quantized model.
 
 This is the directory holding the additional resources
 
+- **`setup_dataset.ipynb`**
+    This is the notebook containing working code for downloading CIFAR10 dataset through keras. Please run this **first** before run `main.py`.
+
 - **`data_loaders.py`**
     This is the script for loading data to the GPFQ algorithm
 
@@ -56,9 +59,6 @@ This is the directory holding the additional resources
 
 - **`utils.py`**
     Scripts containing helper functions
-
-- **`setup_dataset.ipynb`**
-    This is the notebook containing working code for downloading CIFAR10 dataset through keras.
 
 ### `requirements.txt`
 
