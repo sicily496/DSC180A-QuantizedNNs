@@ -43,6 +43,19 @@ parser.add_argument('--fusion', '-f', action='store_true', help='fusing CNN and 
 args = parser.parse_args()
 
 
+import torch.nn as nn
+from torchvision.models import resnet18
+class ResNet18ForCIFAR10(nn.Module):
+    def __init__(self, num_classes=10):
+        super(ResNet18ForCIFAR10, self).__init__()
+        self.model = resnet18(pretrained=False)
+        # Adjust the first convolutional layer to match the pre-trained model
+        self.model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
+
+    def forward(self, x):
+        return self.model(x)
+
 def main(b, mlp_s, cnn_s, bs, mlp_per, cnn_per, l):
     batch_size = bs  
     bits = b
@@ -73,10 +86,22 @@ def main(b, mlp_s, cnn_s, bs, mlp_per, cnn_per, l):
             'mobilenet_v2': (.71878, .90286)
         }
 
-    elif args.data_set == 'CIFAR10':
-        model = getattr(torchvision.models, args.model)(pretrained=True)
-        # model = torch.load(os.path.join('pretrained_cifar10', args.model + '_cifar10.pt'), 
-        #     map_location=torch.device('cpu')).module
+    if args.data_set == 'CIFAR10':
+        state_dict = torch.load(
+        os.path.join('../pretrained_cifar10', args.model + '_cifar10.pt'),
+        map_location=torch.device('cpu')
+        )
+
+        # Rename keys by adding the "model." prefix
+        new_state_dict = {}
+        for key in state_dict.keys():
+            new_state_dict[f"model.{key}"] = state_dict[key]
+
+        # Load the modified state dictionary into the model
+        model = ResNet18ForCIFAR10()
+        model.load_state_dict(new_state_dict)
+
+
 
         original_accuracy_table = {}
     
