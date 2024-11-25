@@ -4,13 +4,13 @@ This is the repository for DSC180 Q1 project, for conducting post-training quant
 
 ## Guide on Installing Dependencies
 
-The repo would reuqire python version that is greater than `3.8.0` is installed in the user's 
+The repo would require python version larger than `3.8.0` is installed in the user's 
 machine.
 
 To install the necessary dependency, one can first start a virtual environment
 by doing the following: 
 ```
-python3 -m venv .venv
+python3.9 -m venv .venv
 source .venv/bin/activate
 ```
 Then can install file using the `requirements.txt` file
@@ -21,7 +21,7 @@ This should install all the required dependencies of this project.
 
 ## Repo Overview
 
-This repository contains code for replicating GPFQ quantization algorithm and notebook for holding CIFAR10 data and pre-trained model. There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
+This repository contains code for replicating GPFQ quantization algorithm and notebook for visualizing train and test data (CIFAR10). There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
 
 ### `Logs`
 
@@ -43,7 +43,7 @@ This is the directory holding the quantized model.
 This is the directory holding the additional resources
 
 - **`setup_dataset.ipynb`**
-    This is the notebook containing working code for downloading CIFAR10 dataset through keras. Please run this **first** before run `main.py`.
+    This is the notebook containing working code for visualizing CIFAR10 dataset.
 
 - **`data_loaders.py`**
     This is the script for loading data to the GPFQ algorithm
@@ -70,3 +70,4 @@ To run GPFQ on CIFAR-10, first cd into `src`, then use the following command:
 ```
 python main.py -ds CIFAR10 -model resnet18 -b 4 -bs 256 -s 1.16
 ```
+This is quantize the ResNet-18 using CIFAR10 data with bit = 4, batch_size = 256, scalar = 1.16.
