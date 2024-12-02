@@ -38,9 +38,18 @@ This is the directory holding the logs data for recording the quantization resul
     - `MLP_Alphabet_Scalar`, `CNN_Alphabet_Scalar`: Scalars used for alphabet quantization in MLP and CNN layers.
     - `Regularizer`, `Lambda`: Regularization type and lambda value used in quantization to sparsify weights.
 
+- **`Quantization_Log_Scalar.csv`**
+    This CSV file contains the results of various quantized models, which are parameterized by different scalar values ranging from 1.0 to 2.0, with an incremental step size of 0.05.
+  
+- **`Quantization_Log_Bit.csv`**
+    This CSV file contains the results of various quantized models, which are parameterized by different bit size ranging from 1 to 8, with an incremental step size of 1.
+  
 ### `pretrained_cifar10`
 
 This is the directory holding a pretrained resnet-18 model for CIFAR10. 
+
+- **`resnet18_cifar10.pt`**
+  This file contains the saved state dictionary of a ResNet-18 model that has been trained or is ready to be used on the CIFAR-10 dataset.
 
 ### `quantized_models`
 
