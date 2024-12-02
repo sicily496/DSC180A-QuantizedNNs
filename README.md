@@ -83,10 +83,36 @@ This is the file holding the required package version for the environment.
 
 
 ## Commands to Run
-To run GPFQ on selected dataset with specific pre-trained model, first cd into `src`, then use the following command:
+
+To run GPFQ on a specific dataset and pre-trained model, navigate to the `src` directory and execute the following command:
+
+```bash
+python main.py -ds dataset_name -model model_name -b width -bs batch_size -s scalar
 ```
-python main.py -ds dataset_name -model model_name -b width - bs batch_size -s scalar
-```
+
+**Parameters Explanation**
+
+-ds dataset_name: Specifies the name of the dataset to use.
+
+Example: MNIST, CIFAR10.
+
+-model model_name: Defines the pre-trained model to apply GPFQ.
+
+Example: ResNet, LeNet.
+
+-b width: Sets the bit-width for quantization.
+
+Example: 8, 16.
+
+-bs batch_size: Specifies the batch size for processing the dataset.
+
+Example: 32, 64.
+
+-s scalar: A scaling factor applied during the quantization process.
+
+Example: 0.1, 1.0.
+
+
 Here is one example of the command:
 
 ```
