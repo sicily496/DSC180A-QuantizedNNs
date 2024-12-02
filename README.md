@@ -38,9 +38,18 @@ This is the directory holding the logs data for recording the quantization resul
     - `MLP_Alphabet_Scalar`, `CNN_Alphabet_Scalar`: Scalars used for alphabet quantization in MLP and CNN layers.
     - `Regularizer`, `Lambda`: Regularization type and lambda value used in quantization to sparsify weights.
 
+- **`Quantization_Log_Scalar.csv`**
+    This CSV file contains the results of various quantized models, which are parameterized by different scalar values ranging from 1.0 to 2.0, with an incremental step size of 0.05.
+  
+- **`Quantization_Log_Bit.csv`**
+    This CSV file contains the results of various quantized models, which are parameterized by different bit size ranging from 1 to 8, with an incremental step size of 1.
+  
 ### `pretrained_cifar10`
 
 This is the directory holding a pretrained resnet-18 model for CIFAR10. 
+
+- **`resnet18_cifar10.pt`**
+  This file contains the saved state dictionary of a ResNet-18 model that has been trained or is ready to be used on the CIFAR-10 dataset.
 
 ### `quantized_models`
 
@@ -74,7 +83,38 @@ This is the file holding the required package version for the environment.
 
 
 ## Commands to Run
-To run GPFQ on CIFAR-10, first cd into `src`, then use the following command:
+
+To run GPFQ on a specific dataset and pre-trained model, navigate to the `src` directory and execute the following command:
+
+```bash
+python main.py -ds dataset_name -model model_name -b width -bs batch_size -s scalar
+```
+
+**Parameters Explanation**
+
+- -ds dataset_name: Specifies the name of the dataset to use.
+
+Example: MNIST, CIFAR10.
+
+- -model model_name: Defines the pre-trained model to apply GPFQ.
+
+    Example: ResNet, LeNet.
+
+- -b width: Sets the bit-width for quantization.
+
+    Example: 8, 16.
+
+- -bs batch_size: Specifies the batch size for processing the dataset.
+
+    Example: 32, 64.
+
+- -s scalar: A scaling factor applied during the quantization process.
+
+    Example: 0.1, 1.0.
+
+
+Here is one example of the command:
+
 ```
 python main.py -ds CIFAR10 -model resnet18 -b 4 -bs 256 -s 1.16
 ```
