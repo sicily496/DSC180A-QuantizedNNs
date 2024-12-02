@@ -24,7 +24,7 @@ parser.add_argument('--percentile', '-p', default=[1], type=float, nargs='+',
                     help='percentile of weights')
 parser.add_argument('--num_worker', '-w', default=8, type=int, 
                     help='number of workers for data loader')
-parser.add_argument('--data_set', '-ds', default='ILSVRC2012', choices=['ILSVRC2012', 'CIFAR10'],
+parser.add_argument('--data_set', '-ds', default='CIFAR10', choices=['CIFAR10'],
                     help='dataset used for quantization')
 parser.add_argument('-model', default='resnet18', help='model name')   
 parser.add_argument('--stochastic_quantization', '-sq', action='store_true',
@@ -43,6 +43,19 @@ parser.add_argument('--fusion', '-f', action='store_true', help='fusing CNN and 
 args = parser.parse_args()
 
 
+import torch.nn as nn
+from torchvision.models import resnet18
+class ResNet18ForCIFAR10(nn.Module):
+    def __init__(self, num_classes=10):
+        super(ResNet18ForCIFAR10, self).__init__()
+        self.model = resnet18(pretrained=False)
+        # Adjust the first convolutional layer to match the pre-trained model
+        self.model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
+
+    def forward(self, x):
+        return self.model(x)
+
 def main(b, mlp_s, cnn_s, bs, mlp_per, cnn_per, l):
     batch_size = bs  
     bits = b
@@ -58,25 +71,22 @@ def main(b, mlp_s, cnn_s, bs, mlp_per, cnn_per, l):
     torch.manual_seed(args.seed)
 
     # load the model to be quantized
-    if args.data_set == 'ILSVRC2012':
-        model = getattr(torchvision.models, args.model)(pretrained=True)
+    if args.data_set == 'CIFAR10':
+        state_dict = torch.load(
+        os.path.join('../pretrained_cifar10', args.model + '_cifar10.pt'),
+        map_location=torch.device('cpu')
+        )
 
-        # NOTE: refer to https://pytorch.org/vision/stable/models.html
-        original_accuracy_table = {
-            'alexnet': (.56522, .79066),
-            'vgg16': (.71592, .90382),
-            'resnet18': (.69758, .89078),
-            'googlenet': (.69778, .89530),
-            'resnet50': (.7613, .92862),
-            'efficientnet_b1': (.7761, .93596),
-            'efficientnet_b7': (.84122, .96908),
-            'mobilenet_v2': (.71878, .90286)
-        }
+        # Rename keys by adding the "model." prefix
+        new_state_dict = {}
+        for key in state_dict.keys():
+            new_state_dict[f"model.{key}"] = state_dict[key]
 
-    elif args.data_set == 'CIFAR10':
-        model = getattr(torchvision.models, args.model)(pretrained=True)
-        # model = torch.load(os.path.join('pretrained_cifar10', args.model + '_cifar10.pt'), 
-        #     map_location=torch.device('cpu')).module
+        # Load the modified state dictionary into the model
+        model = ResNet18ForCIFAR10()
+        model.load_state_dict(new_state_dict)
+
+
 
         original_accuracy_table = {}
     
