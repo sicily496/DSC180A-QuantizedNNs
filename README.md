@@ -23,6 +23,10 @@ This should install all the required dependencies of this project.
 
 This repository contains code for replicating GPFQ quantization algorithm and notebook for visualizing train and test data (CIFAR10). There are several directories, each serving a specific purpose. Below is an overview of each directory to help you navigate the codebase effectively.
 
+### `image`
+
+This is the directory holding the figures for quantization result among different parameters. 
+
 ### `Logs`
 
 This is the directory holding the logs data for recording the quantization result. 
@@ -34,6 +38,10 @@ This is the directory holding the logs data for recording the quantization resul
     - `MLP_Alphabet_Scalar`, `CNN_Alphabet_Scalar`: Scalars used for alphabet quantization in MLP and CNN layers.
     - `Regularizer`, `Lambda`: Regularization type and lambda value used in quantization to sparsify weights.
 
+### `pretrained_cifar10`
+
+This is the directory holding a pretrained resnet-18 model for CIFAR10. 
+
 ### `quantized_models`
 
 This is the directory holding the quantized model.
@@ -42,7 +50,7 @@ This is the directory holding the quantized model.
 
 This is the directory holding the additional resources
 
-- **`setup_dataset.ipynb`**
+- **`visualize_dataset.ipynb`**
     This is the notebook containing working code for visualizing CIFAR10 dataset.
 
 - **`data_loaders.py`**
